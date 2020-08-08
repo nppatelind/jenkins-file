@@ -1,0 +1,20 @@
+node (){
+   
+stage ("code checkout"){
+    echo "checkout"
+    checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nppatelind/java-tomcat-maven-example.git']]]
+}
+stage ("mvn build"){
+    withMaven(jdk: ' jdk', maven: 'maven-3.6.3') {
+    sh label: '', script: 'mvn package'
+}
+    
+}
+stage ("Deploy"){
+    echo "execute shell"
+    sh label: '', script: '''ls /var/lib/jenkins
+cd /var/lib/jenkins/workspace/scripted-pipeline/target
+cp java-tomcat-maven-example.war /var/lib/jenkins
+ls /var/lib/jenkins'''
+}   
+}
