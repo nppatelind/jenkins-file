@@ -6,11 +6,12 @@ stages {
     checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/nppatelind/java-tomcat-maven-example.git']]]
     }
    }
-   stage("checkout"){
+   stage("maven"){
     steps{
      sh label: '', script: 'mvn package'
     }
    }
+   stage("execute shell")
    steps{
      sh label: '', script: '''ls /var/lib/jenkins
 cd /var/lib/jenkins/workspace/scripted-pipeline/target
