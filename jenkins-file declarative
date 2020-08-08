@@ -11,7 +11,7 @@ stages {
      sh label: '', script: 'mvn package'
     }
    }
-   stage("execute shell")
+   stage("execute shell"){
    steps{
      sh label: '', script: '''ls /var/lib/jenkins
 cd /var/lib/jenkins/workspace/scripted-pipeline/target
