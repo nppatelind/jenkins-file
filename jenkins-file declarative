@@ -8,8 +8,10 @@ stages {
    }
    stage("Maven "){
     steps{
+    withMaven(jdk: ' jdk', maven: 'maven-3.6.3') {
+    // some block
     sh label: '', script: 'mvn package'
-    
+    }
     }
    }
    stage("execute shell"){
